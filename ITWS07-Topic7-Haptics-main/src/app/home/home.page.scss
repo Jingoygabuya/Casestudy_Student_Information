@@ -1,0 +1,441 @@
+// Header Styling
+ion-header {
+  z-index: 10;
+  
+  ion-toolbar {
+    --background: #ffffff;
+    
+    ion-title {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #333333;
+    }
+  }
+}
+
+// Content Styling
+ion-content {
+  --background: #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+// Add Button Container
+.add-button-container {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.add-student-btn {
+  --background: #ffffff !important;
+  --color: #667eea !important;
+  --border-color: #667eea !important;
+  --border-width: 2px !important;
+  --border-style: solid !important;
+  --border-radius: 50px !important;
+  --box-shadow: none !important;
+  font-weight: 600 !important;
+  border-radius: 50px !important;
+  
+  color: #667eea !important;
+  border: 2px solid #667eea !important;
+  box-shadow: none !important;
+  outline: none !important;
+  
+  &::part(native) {
+    border-radius: 50px !important;
+    box-shadow: none !important;
+  }
+  
+  ion-icon {
+    color: #667eea !important;
+  }
+}
+
+// Table Card
+.table-card {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+
+  ion-card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1.5rem;
+
+    ion-card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+    }
+  }
+
+  ion-card-content {
+    padding: 0;
+  }
+}
+
+// Desktop Table Styling
+.table-container {
+  overflow-x: auto;
+  display: block;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.students-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+
+  thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    
+    tr {
+      th {
+        padding: 1.2rem 1rem;
+        text-align: left;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border: none;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid #e0e0e0;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: #f8f9ff;
+        transform: scale(1.01);
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      td {
+        padding: 1rem;
+        font-size: 0.9rem;
+        color: #333;
+        vertical-align: middle;
+
+        &.name-cell {
+          font-weight: 600;
+          color: #667eea;
+        }
+
+        &.actions-cell {
+          text-align: center;
+          white-space: nowrap;
+
+          ion-button {
+            margin: 0 0.2rem;
+          }
+        }
+
+        &.empty-state {
+          text-align: center;
+          padding: 3rem;
+          color: #999;
+        }
+      }
+    }
+  }
+}
+
+// Mobile Card View
+.mobile-view {
+  display: none;
+  padding: 1rem;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+
+.student-card {
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+
+  ion-card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem;
+
+    ion-card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 0.5rem;
+    }
+
+    ion-chip {
+      margin-top: 0.5rem;
+    }
+  }
+
+  ion-card-content {
+    padding: 1rem;
+
+    ion-list {
+      padding: 0;
+      margin-bottom: 1rem;
+
+      ion-item {
+        --padding-start: 0;
+        margin-bottom: 0.5rem;
+
+        ion-label {
+          font-size: 0.9rem;
+
+          strong {
+            color: #667eea;
+          }
+        }
+      }
+    }
+  }
+
+  .mobile-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+}
+
+.empty-card {
+  text-align: center;
+  padding: 3rem 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+// Status Chips
+ion-chip {
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+}
+
+// Modal Styling
+ion-modal {
+  --height: auto;
+  --border-radius: 16px;
+
+  ion-header {
+    ion-toolbar {
+      --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+  }
+
+  ion-content {
+    --background: #fff;
+
+    form {
+      ion-item {
+        --padding-start: 0;
+        --inner-padding-end: 0;
+        margin-bottom: 1rem;
+        --border-color: #e0e0e0;
+        --border-width: 1px;
+        border-radius: 8px;
+
+        ion-input,
+        ion-select {
+          --padding-start: 1rem;
+          --padding-end: 1rem;
+        }
+      }
+
+      ion-button {
+        --border-radius: 8px;
+        height: 48px;
+        font-weight: 600;
+        margin-top: 1.5rem;
+      }
+    }
+  }
+}
+
+// Button Styling
+ion-button {
+  --border-radius: 8px;
+  font-weight: 600;
+  text-transform: none;
+
+  &[fill="solid"] {
+    --box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  }
+}
+
+// Remove default shadows
+ion-card {
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+// Popup Form Styling
+.form-popup {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(0, 0, 0, 0.6) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 999999 !important;
+  animation: fadeIn 0.2s ease;
+  padding: 20px;
+  overflow-y: auto !important;
+}
+
+.form-card {
+  width: 100%;
+  max-width: 480px;
+  max-height: 85vh;
+  overflow-y: auto;
+  margin: auto;
+  animation: slideUp 0.3s ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  z-index: 1000000 !important;
+  position: relative !important;
+  border-radius: 20px;
+  background: #ffffff;
+
+  ion-card-content {
+    padding: 40px 35px;
+    background: #ffffff;
+  }
+}
+
+// Form Title
+.form-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #2d3748;
+  text-align: center;
+  margin: 0 0 35px 0;
+  letter-spacing: -0.5px;
+}
+
+// Modern Form Styling
+.modern-form {
+  .form-group {
+    margin-bottom: 28px;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #718096;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .form-input,
+  .form-select {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 1rem;
+    color: #2d3748;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #e2e8f0;
+    outline: none;
+    transition: border-color 0.3s ease;
+    font-family: inherit;
+
+    &::placeholder {
+      color: #cbd5e0;
+      font-size: 0.95rem;
+    }
+
+    &:focus {
+      border-bottom-color: #667eea;
+    }
+  }
+
+  .form-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23718096' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 5px center;
+    cursor: pointer;
+    padding-right: 25px;
+    color: #4a5568;
+
+    option {
+      color: #2d3748;
+    }
+  }
+
+  // Submit Button with Gradient
+  .submit-btn {
+    width: 100%;
+    padding: 16px;
+    margin-top: 35px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #ffffff;
+    background: linear-gradient(135deg, #a855f7 0%, #06b6d4 100%);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(168, 85, 247, 0.3);
+    letter-spacing: 0.5px;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(168, 85, 247, 0.4);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.table-row,
+.student-card {
+  animation: fadeIn 0.3s ease;
+}

@@ -1,0 +1,7 @@
+{
+  "name": "Topic7-Haptics",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

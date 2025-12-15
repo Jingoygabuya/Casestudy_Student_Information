@@ -1,0 +1,227 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Student Management System</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <!-- Add Student Button -->
+  <div class="add-button-container">
+    <ion-button (click)="openAddModal()" fill="outline" color="primary" size="default" class="add-student-btn" style="--color: #667eea; color: #667eea; --border-color: #667eea;">
+      <ion-icon slot="start" name="person-add-outline" style="color: #667eea;"></ion-icon>
+      <span style="color: #667eea;">Add Student</span>
+    </ion-button>
+  </div>
+
+  <!-- Students Table -->
+  <ion-card class="table-card">
+    <ion-card-header>
+      <ion-card-title>Student List ({{ filteredStudents.length }} students)</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- Desktop Table View -->
+      <div class="table-container">
+        <table class="students-table">
+          <thead>
+            <tr>
+              <th>Student ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Course</th>
+              <th>Year Level</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of filteredStudents" class="table-row">
+              <td>{{ student.student_id }}</td>
+              <td class="name-cell">{{ student.first_name }} {{ student.last_name }}</td>
+              <td>{{ student.email }}</td>
+              <td>{{ student.phone }}</td>
+              <td>{{ student.course }}</td>
+              <td>{{ student.year_level }}</td>
+              <td class="actions-cell">
+                <ion-button size="small" fill="clear" color="primary" (click)="openEditModal(student)">
+                  <ion-icon name="create-outline"></ion-icon>
+                </ion-button>
+                <ion-button size="small" fill="clear" color="danger" (click)="deleteStudent(student)">
+                  <ion-icon name="trash-outline"></ion-icon>
+                </ion-button>
+              </td>
+            </tr>
+            <tr *ngIf="filteredStudents.length === 0">
+              <td colspan="7" class="empty-state">
+                <ion-text color="medium">
+                  <p>No students found.</p>
+                </ion-text>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Mobile Card View -->
+      <div class="mobile-view">
+        <ion-card *ngFor="let student of filteredStudents" class="student-card">
+          <ion-card-header>
+            <ion-card-title>{{ student.first_name }} {{ student.last_name }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list lines="none">
+              <ion-item>
+                <ion-label>
+                  <strong>Student ID:</strong> {{ student.student_id }}
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label>
+                  <strong>Email:</strong> {{ student.email }}
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label>
+                  <strong>Phone:</strong> {{ student.phone }}
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label>
+                  <strong>Course:</strong> {{ student.course }}
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label>
+                  <strong>Year Level:</strong> {{ student.year_level }}
+                </ion-label>
+              </ion-item>
+            </ion-list>
+            <div class="mobile-actions">
+              <ion-button expand="block" fill="outline" color="primary" (click)="openEditModal(student)">
+                <ion-icon slot="start" name="create-outline"></ion-icon>
+                Edit
+              </ion-button>
+              <ion-button expand="block" fill="outline" color="danger" (click)="deleteStudent(student)">
+                <ion-icon slot="start" name="trash-outline"></ion-icon>
+                Delete
+              </ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card *ngIf="filteredStudents.length === 0" class="empty-card">
+          <ion-card-content>
+            <ion-text color="medium">
+              <p>No students found.</p>
+            </ion-text>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Popup Form Card -->
+  <div class="form-popup" *ngIf="isModalOpen" (click)="closeModal()">
+    <ion-card class="form-card" (click)="$event.stopPropagation()">
+      <ion-card-content>
+        <h1 class="form-title">Student Input</h1>
+        
+        <form class="modern-form">
+          <div class="form-group">
+            <label class="form-label">Student ID</label>
+            <input 
+              type="text" 
+              class="form-input" 
+              placeholder="Enter student ID"
+              [(ngModel)]="studentForm.student_id"
+              name="student_id"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <input 
+              type="text" 
+              class="form-input" 
+              placeholder="Enter first name"
+              [(ngModel)]="studentForm.first_name"
+              name="first_name"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input 
+              type="text" 
+              class="form-input" 
+              placeholder="Enter last name"
+              [(ngModel)]="studentForm.last_name"
+              name="last_name"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input 
+              type="email" 
+              class="form-input" 
+              placeholder="Enter your email address"
+              [(ngModel)]="studentForm.email"
+              name="email"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Phone</label>
+            <input 
+              type="tel" 
+              class="form-input" 
+              placeholder="Enter phone number"
+              [(ngModel)]="studentForm.phone"
+              name="phone"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Course</label>
+            <select 
+              class="form-select" 
+              [(ngModel)]="studentForm.course"
+              name="course"
+            >
+              <option value="" disabled selected>Choose Course</option>
+              <option *ngFor="let course of courses" [value]="course">
+                {{ course }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Year Level</label>
+            <select 
+              class="form-select" 
+              [(ngModel)]="studentForm.year_level"
+              name="year_level"
+            >
+              <option value="" disabled selected>Select Year Level</option>
+              <option *ngFor="let year of yearLevels" [value]="year">
+                {{ year }}
+              </option>
+            </select>
+          </div>
+
+          <button 
+            type="button"
+            class="submit-btn" 
+            (click)="saveStudent()"
+          >
+            {{ isEditMode ? 'Update →' : 'Submit →' }}
+          </button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
